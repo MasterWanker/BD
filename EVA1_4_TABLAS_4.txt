@@ -1,0 +1,252 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \connect --mysql root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 4
+Server version: 5.5.20 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  localhost:3306  SQL > select version();
++-----------+
+| version() |
++-----------+
+| 5.5.20    |
++-----------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > \use personal;
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'personal;'
+
+ MySQL  localhost:3306  SQL > \use personal
+Default schema set to `personal`.
+Fetching table and column names from `personal` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  personal  SQL > create table Personal;
+ERROR: 1113 (42000): A table must have at least 1 column
+
+ MySQL  localhost:3306  personal  SQL > create table Personal(
+                                    ... clave int,
+                                    ... nombre varchar(50),
+                                    ... apellido varchar(50),
+                                    ... departamento varchar(50),
+                                    ... salario float);
+Query OK, 0 rows affected (0.2171 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc perosnal;
+ERROR: 1146 (42S02): Table 'personal.perosnal' doesn't exist
+
+ MySQL  localhost:3306  personal  SQL > desc personal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| clave        | int(11)     | YES  |     | NULL    |       |
+| nombre       | varchar(50) | YES  |     | NULL    |       |
+| apellido     | varchar(50) | YES  |     | NULL    |       |
+| departamento | varchar(50) | YES  |     | NULL    |       |
+| salario      | float       | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.0047 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into personal(clave,nombre)
+                                    ... values(1,'Sergio');
+Query OK, 1 row affected (0.0450 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into personal values(2,'Alberto','Caneo', 'Mecanografia', 3567.21);
+Query OK, 1 row affected (0.0455 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into personal(clave,nombre) values(3,'Maria'),(4,'Jorge'),(5,'Alan');
+Query OK, 3 rows affected (0.0420 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > select * from personal;
++-------+---------+----------+--------------+---------+
+| clave | nombre  | apellido | departamento | salario |
++-------+---------+----------+--------------+---------+
+|     1 | Sergio  | NULL     | NULL         |    NULL |
+|     2 | Alberto | Caneo    | Mecanografia | 3567.21 |
+|     3 | Maria   | NULL     | NULL         |    NULL |
+|     4 | Jorge   | NULL     | NULL         |    NULL |
+|     5 | Alan    | NULL     | NULL         |    NULL |
++-------+---------+----------+--------------+---------+
+5 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc personal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| clave        | int(11)     | YES  |     | NULL    |       |
+| nombre       | varchar(50) | YES  |     | NULL    |       |
+| apellido     | varchar(50) | YES  |     | NULL    |       |
+| departamento | varchar(50) | YES  |     | NULL    |       |
+| salario      | float       | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.0044 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table personal2;
+ERROR: 1113 (42000): A table must have at least 1 column
+
+ MySQL  localhost:3306  personal  SQL > create table personal2(
+                                    ... clave int AUTO_INCREMENT,
+                                    ... nombre varchar(50) not null,
+                                    ... apellido varchar(50) not null,
+                                    ... departamento enum('SISTEMAS','CONTABILIDAD','INHUMANS','PRODUCCION'),
+                                    ... salario float default 15000);
+ERROR: 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+
+ MySQL  localhost:3306  personal  SQL >
+ MySQL  localhost:3306  personal  SQL > create table personal2(
+                                    ...                                     ... clave int AUTO_INCREMENT,
+                                    ...                                     ... nombre varchar(50) not null,
+                                    ...                                     ... apellido varchar(50) not null,
+                                    ...                                     ... departamento enum('SISTEMAS','CONTABILIDAD','INHUMANS','PRODUCCION'),
+                                    ...                                     ... salario float default 15000);FRR
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.. clave int AUTO_INCREMENT,
+... nombre varchar(50) not null,
+... apellido varch' at line 2
+
+                                    ... create table personal2( clave int PRIMARY KERY NOT NULL AUTO_INCREMENT, nombre varchar(50) not null, apellido varchar(50) not null, departamento enum('SISTEMAS','CONTABILIDAD','INHUMANS','PRODUCCION'), salario float default 15000);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRR
+create table personal2( clave int PRIMARY KERY NOT NULL AUTO_INCREMENT, nomb' at line 1
+
+ MySQL  localhost:3306  personal  SQL > FRR create table personal2( clave int PRIMARY KEY NOT NULL AUTO_INCREMENT, nombre varchar(50) not null, apellido varchar(50) not null, departamento enum('SISTEMAS','CONTABILIDAD','INHUMANS','PRODUCCION'), salario float default 15000);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRR create table personal2( clave int PRIMARY KEY NOT NULL AUTO_INCREMENT, nombr' at line 1
+
+ MySQL  localhost:3306  personal  SQL > create table personal2( clave int PRIMARY KEY NOT NULL AUTO_INCREMENT, nombre varchar(50) not null, apellido varchar(50) not null, departamento enum('SISTEMAS','CONTABILIDAD','INHUMANS','PRODUCCION'), salario float default 15000);
+Query OK, 0 rows affected (0.0769 sec)
+
+ MySQL  localhost:3306  personal  SQL > DESC PERSONAL2
+                                    ... ;
++--------------+---------------------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                                    | Null | Key | Default | Extra          |
++--------------+---------------------------------------------------------+------+-----+---------+----------------+
+| clave        | int(11)                                                 | NO   | PRI | NULL    | auto_increment |
+| nombre       | varchar(50)                                             | NO   |     | NULL    |                |
+| apellido     | varchar(50)                                             | NO   |     | NULL    |                |
+| departamento | enum('SISTEMAS','CONTABILIDAD','INHUMANS','PRODUCCION') | YES  |     | NULL    |                |
+| salario      | float                                                   | YES  |     | 15000   |                |
++--------------+---------------------------------------------------------+------+-----+---------+----------------+
+5 rows in set (0.0042 sec)
+
+ MySQL  localhost:3306  personal  SQL > Insert into personal2(nombre,apellido) values('Ben','Dover');
+Query OK, 1 row affected (0.0476 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from personal2
+                                    ... ;
++-------+--------+----------+--------------+---------+
+| clave | nombre | apellido | departamento | salario |
++-------+--------+----------+--------------+---------+
+|     1 | Ben    | Dover    | NULL         |   15000 |
++-------+--------+----------+--------------+---------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > Insert into personal2(nombre,apellido,departamento) values('Ben','Dover','sistemas');
+Query OK, 1 row affected (0.0348 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from persnal2;
+ERROR: 1146 (42S02): Table 'personal.persnal2' doesn't exist
+
+ MySQL  localhost:3306  personal  SQL > select * from personal2;
++-------+--------+----------+--------------+---------+
+| clave | nombre | apellido | departamento | salario |
++-------+--------+----------+--------------+---------+
+|     1 | Ben    | Dover    | NULL         |   15000 |
+|     2 | Ben    | Dover    | SISTEMAS     |   15000 |
++-------+--------+----------+--------------+---------+
+2 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > Insert into personal2(nombre,apellido,departamento) values('Ben','Dover','sistemasas');
+ERROR: 1265 (01000): Data truncated for column 'departamento' at row 1
+
+ MySQL  localhost:3306  personal  SQL > select * from personal2;
++-------+--------+----------+--------------+---------+
+| clave | nombre | apellido | departamento | salario |
++-------+--------+----------+--------------+---------+
+|     1 | Ben    | Dover    | NULL         |   15000 |
+|     2 | Ben    | Dover    | SISTEMAS     |   15000 |
++-------+--------+----------+--------------+---------+
+2 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > Insert into personal2 values('Ben','Dover','sistemas',16500);
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306  personal  SQL > Insert into personal2(clave,nombre,apellido,departamento) values(5,'Ben','Dover','sistemas');
+Query OK, 1 row affected (0.0341 sec)
+
+ MySQL  localhost:3306  personal  SQL > selectr * from personal2;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selectr * from personal2' at line 1
+
+ MySQL  localhost:3306  personal  SQL > select * from personal2;
++-------+--------+----------+--------------+---------+
+| clave | nombre | apellido | departamento | salario |
++-------+--------+----------+--------------+---------+
+|     1 | Ben    | Dover    | NULL         |   15000 |
+|     2 | Ben    | Dover    | SISTEMAS     |   15000 |
+|     5 | Ben    | Dover    | SISTEMAS     |   15000 |
++-------+--------+----------+--------------+---------+
+3 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table pais(clave INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                                    ... NOMBRE VARCHAR(50) not null unique,
+                                    ... poblacion int default 1,
+                                    ... continente varchar(50) enum('AFRICA', 'AMERICA, 'OCEANIA', 'ASIA','ANTARTIDA');
+                                    ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'enum('AFRICA', 'AMERICA, 'OCEANIA', 'ASIA','ANTARTIDA');
+)' at line 4
+
+                                    ... create table pais(clave INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                                    ...                                     ... NOMBRE VARCHAR(50) not null unique,
+                                    ...                                     ... poblacion int default 1,
+                                    ...                                     ... continente varchar(50) enum('AFRICA', 'AMERICA, 'OCEANIA', 'ASIA','ANTARTIDA');
+                                    ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.. NOMBRE VARCHAR(50) not null unique,
+... poblacion int default 1,
+... continen' at line 2
+
+                                    ... CREATE TABLE pais(clave int not null PRIMARY KEY AUTO_INCREMENT,
+                                    ... NOMBRE VARCHAR(50) NOT NULL UNIQUE,
+                                    ... poblacion int default 1,
+                                    ... continente varchar(50) enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA')
+                                    ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA')
+)' at line 4
+
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE pais(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE VARCHAR(50) NOT NULL, poblacion int default 1, continente varchar(50) enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') )' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE pais(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE VARCHAR(50) NOT NULL, poblacion int default 1, continente varchar(50) enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') )' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE pais(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE VARCHAR(50) NOT NULL, poblacion int default 1, continente varchar(50) enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') )' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE pais(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE VARCHAR(50) NOT NULL, poblacion int default 1, continente enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+Query OK, 0 rows affected (0.0991 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc pais;
++------------+-------------------------------------------------------+------+-----+---------+----------------+
+| Field      | Type                                                  | Null | Key | Default | Extra          |
++------------+-------------------------------------------------------+------+-----+---------+----------------+
+| clave      | int(11)                                               | NO   | PRI | NULL    | auto_increment |
+| NOMBRE     | varchar(50)                                           | NO   |     | NULL    |                |
+| poblacion  | int(11)                                               | YES  |     | 1       |                |
+| continente | enum('AFRICA','AMERICA','OCEANIA','ASIA','ANTARTIDA') | YES  |     | NULL    |                |
++------------+-------------------------------------------------------+------+-----+---------+----------------+
+4 rows in set (0.0043 sec)
+
+ MySQL  localhost:3306  personal  SQL >

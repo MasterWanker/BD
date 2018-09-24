@@ -1,0 +1,116 @@
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE paises(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE UNIQUE VARCHAR(50) NOT NULL, poblacion int default 1, continente enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UNIQUE VARCHAR(50) NOT NULL, poblacion int default 1, continente enum('AFRICA', ' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE paises(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE not null UNIQUE VARCHAR(50) NOT NULL, poblacion int default 1, continente enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null UNIQUE VARCHAR(50) NOT NULL, poblacion int default 1, continente enum('' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE TABLE paises(clave int not null PRIMARY KEY AUTO_INCREMENT, NOMBRE VARCHAR(50) NOT NULL UNIQUE, poblacion int default 1, continente enum('AFRICA', 'AMERICA', 'OCEANIA', 'ASIA', 'ANTARTIDA') );
+Query OK, 0 rows affected (0.3268 sec)
+
+ MySQL  localhost:3306  personal  SQL > \use personal
+Default schema set to `personal`.
+Fetching table and column names from `personal` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  personal  SQL > alter table peronal add rfc varchar(50) not null unique;
+ERROR: 1146 (42S02): Table 'personal.peronal' doesn't exist
+
+ MySQL  localhost:3306  personal  SQL > alter table personal add rfc varchar(50) not null unique;
+ERROR: 1062 (23000): Duplicate entry '' for key 'rfc'
+
+ MySQL  localhost:3306  personal  SQL > delete from personal;
+Query OK, 5 rows affected (0.0348 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from personal;
+Empty set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > alter table personal add rfc varchar(50) not null unique;
+Query OK, 0 rows affected (0.1290 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > insert into personal(nombre,apellido,departamnto,rfc)
+                                    ... values('Juan','Perez','INHUMANOS','ALGO15555000123');
+ERROR: 1054 (42S22): Unknown column 'departamnto' in 'field list'
+
+ MySQL  localhost:3306  personal  SQL > insert into personal(nombre,apellido,departamento,rfc) values('Juan','Perez','INHUMANOS','ALGO15555000123');
+Query OK, 1 row affected (0.0260 sec)
+
+ MySQL  localhost:3306  personal  SQL > values('Juan','Perez,'INHUMANOS','ALGO15555000123');
+                                    ... ;
+                                    ... :
+                                    ... ;
+                                    ... end
+                                    ... ;
+                                    ... insert into
+                                    ... personal;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values('Juan','Perez,'INHUMANOS','ALGO15555000123');
+:
+end
+insert into
+personal' at line 1
+
+ MySQL  localhost:3306  personal  SQL > desc personal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| clave        | int(11)     | YES  |     | NULL    |       |
+| nombre       | varchar(50) | YES  |     | NULL    |       |
+| apellido     | varchar(50) | YES  |     | NULL    |       |
+| departamento | varchar(50) | YES  |     | NULL    |       |
+| salario      | float       | YES  |     | NULL    |       |
+| rfc          | varchar(50) | NO   | PRI | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.0054 sec)
+
+ MySQL  localhost:3306  personal  SQL > alter table personal add mfc varchar(50) not null unique;
+Query OK, 1 row affected (0.0991 sec)
+
+Records: 1  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > desc personal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| clave        | int(11)     | YES  |     | NULL    |       |
+| nombre       | varchar(50) | YES  |     | NULL    |       |
+| apellido     | varchar(50) | YES  |     | NULL    |       |
+| departamento | varchar(50) | YES  |     | NULL    |       |
+| salario      | float       | YES  |     | NULL    |       |
+| rfc          | varchar(50) | NO   | PRI | NULL    |       |
+| mfc          | varchar(50) | NO   | UNI | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.0054 sec)
+
+ MySQL  localhost:3306  personal  SQL > alter table personal add mfec varchar(50) unique;
+Query OK, 1 row affected (0.1051 sec)
+
+Records: 1  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > desc personal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| clave        | int(11)     | YES  |     | NULL    |       |
+| nombre       | varchar(50) | YES  |     | NULL    |       |
+| apellido     | varchar(50) | YES  |     | NULL    |       |
+| departamento | varchar(50) | YES  |     | NULL    |       |
+| salario      | float       | YES  |     | NULL    |       |
+| rfc          | varchar(50) | NO   | PRI | NULL    |       |
+| mfc          | varchar(50) | NO   | UNI | NULL    |       |
+| mfec         | varchar(50) | YES  | UNI | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.0058 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table jobs(job_id int PRIMARY KEY not null AUTO INCREMENT, job_title varchar(50) default '', salario_min float default 8000, salario_max default null );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AUTO INCREMENT, job_title varchar(50) default '', salario_min float default 8000' at line 1
+
+ MySQL  localhost:3306  personal  SQL > create table jobs(job_id int not null PRIMARY KEY AUTO INCREMENT, job_title varchar(50) default '', salario_min float default 8000, salario_max default null );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AUTO INCREMENT, job_title varchar(50) default '', salario_min float default 8000' at line 1
+
+ MySQL  localhost:3306  personal  SQL > create table jobs(job_id int not null PRIMARY KEY AUTO_INCREMENT, job_title varchar(50) default '', salario_min float default 8000, salario_max default null );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default null )' at line 1
+
+ MySQL  localhost:3306  personal  SQL > create table jobs(job_id int not null PRIMARY KEY AUTO_INCREMENT, job_title varchar(50) default '', salario_min float default 8000, salario_max float default null);
+Query OK, 0 rows affected (0.0497 sec)
+
+ MySQL  localhost:3306  personal  SQL >

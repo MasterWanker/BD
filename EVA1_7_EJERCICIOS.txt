@@ -1,0 +1,109 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect --mysql root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 4
+Server version: 5.5.61 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  SQL > \use personal
+Default schema set to `personal`.
+Fetching table and column names from `personal` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  personal  SQL > show tables;
++--------------------+
+| Tables_in_personal |
++--------------------+
+| jobs               |
+| pais               |
+| paises             |
+| personal           |
+| personal2          |
++--------------------+
+5 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306  personal  SQL > create user 'estudiamte' IDENTIFIED BY 'mojojojo';
+Query OK, 0 rows affected (0.0840 sec)
+
+ MySQL  localhost:3306  personal  SQL > alter table estudiante add nombre varchar(50);
+Query OK, 0 rows affected (0.4426 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > desc estudiante;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | YES  |     | NULL    |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
+| no_telefono      | varchar(20) | YES  |     | NULL    |       |
+| nombre           | varchar(50) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+9 rows in set (0.0051 sec)
+
+ MySQL  localhost:3306  personal  SQL > GRANT Select (no_control,nombre,apellido_materno,apellido_paterno)
+                                    ... on personal.estudiante to 'estudiamte'@'localhost';
+ERROR: 1133 (42000): Can't find any matching row in the user table
+
+ MySQL  localhost:3306  personal  SQL > GRANT Select (no_control,nombre,apellido_materno,apellido_paterno) on personal.estudiante to 'estudiamte'@'localhost' IDENTIFIED BY 'mojojojo';
+Query OK, 0 rows affected (0.0006 sec)
+
+ MySQL  localhost:3306  personal  SQL > ALTER TABLE estudiante add creditos int;
+Query OK, 0 rows affected (0.0867 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > create user 'user2' identified by 'usurpador';
+Query OK, 0 rows affected (0.0004 sec)
+
+ MySQL  localhost:3306  personal  SQL > GRANT Insert(nombre,creditos) on personal.estudiante to 'user2'@'localhost' identified by 'usuerpador';
+Query OK, 0 rows affected (0.0013 sec)
+
+ MySQL  localhost:3306  personal  SQL > GRANT Select nombre ON personal.estudiante to 'user2'@'localhost' IDENTIFIED BY 'usurpador';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nombre ON personal.estudiante to 'user2'@'localhost' IDENTIFIED BY 'usurpador'' at line 1
+
+ MySQL  localhost:3306  personal  SQL > GRANT Select(nombre) ON personal.estudiante TO 'user2'@'localhost' IDENTIFIED BY 'usurpador';
+Query OK, 0 rows affected (0.0133 sec)
+
+ MySQL  localhost:3306  personal  SQL > Create user 'user3' IDENTIFIED BY 'traicion';
+Query OK, 0 rows affected (0.0004 sec)
+
+ MySQL  localhost:3306  personal  SQL > GRANT INSERT,UPDATE ON personal.estudiante TO 'user3'@'localhost' IDENTIFIED BY 'traicion';
+Query OK, 0 rows affected (0.0006 sec)
+
+ MySQL  localhost:3306  personal  SQL > CREATE 'user4' IDENTIFIED BY 'enlace';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''user4' IDENTIFIED BY 'enlace'' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE USER 'user4' IDENTIFIED BY 'enlace';
+Query OK, 0 rows affected (0.0008 sec)
+
+ MySQL  localhost:3306  personal  SQL > GRANT SELECT ON personal.paises TO 'user4'@'localhost' IDENTIFIED BY 'enlace';
+Query OK, 0 rows affected (0.0005 sec)
+
+ MySQL  localhost:3306  personal  SQL > CREATE USER 'user5' IDENTIFED BY 'ashen';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTIFED BY 'ashen'' at line 1
+
+ MySQL  localhost:3306  personal  SQL > CREATE USER 'user5' IDENTIFIED BY 'ashen';
+Query OK, 0 rows affected (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > GRANT DELETE ON personal.personal2 TO 'user5'@localhost' IDENTIFIED BY 'ashen';

@@ -1,0 +1,274 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \connect --mysql root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 1
+Server version: 5.5.61 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  localhost:3306  SQL > show tables;
+ERROR: 1046 (3D000): No database selected
+
+ MySQL  localhost:3306  SQL > \use personal
+Default schema set to `personal`.
+Fetching table and column names from `personal` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  personal  SQL > show tables;
++--------------------+
+| Tables_in_personal |
++--------------------+
+| carrera            |
+| compras            |
+| estudiante         |
+| jobs               |
+| materias           |
+| pais               |
+| paises             |
+| personal           |
+| personal2          |
++--------------------+
+9 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table factura(
+                                    ... no_factura int auto_increment primary key,
+                                    ... fecha_compra datetime,
+                                    ... clientes_no_cliente int,;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+
+ MySQL  localhost:3306  personal  SQL > create table clientes(
+                                    ... no_cliente int aouto_increment primary key,
+                                    ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'aouto_increment primary key,' at line 2
+
+ MySQL  localhost:3306  personal  SQL > create table clientes(
+                                    ... no_cliente  int auto_increment primary key,
+                                    ... nombre varchar(50),
+                                    ... apellido varchar(50),
+                                    ... RFC varchar(13),
+                                    ... direccion varchar (100),
+                                    ... telefono varchar(50);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7
+
+ MySQL  localhost:3306  personal  SQL > create table clientes( no_cliente  int auto_increment primary key, nombre varchar(50), apellido varchar(50), RFC varchar(13), direccion varchar (100), telefono varchar(50),
+                                    ... celular varchar(50));
+Query OK, 0 rows affected (0.0380 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc clientes;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| no_cliente | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(50)  | YES  |     | NULL    |                |
+| apellido   | varchar(50)  | YES  |     | NULL    |                |
+| RFC        | varchar(13)  | YES  |     | NULL    |                |
+| direccion  | varchar(100) | YES  |     | NULL    |                |
+| telefono   | varchar(50)  | YES  |     | NULL    |                |
+| celular    | varchar(50)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.0049 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table productos(
+                                    ... no_producto int auto_increment primary key,
+                                    ... nombre varchar(50),
+                                    ... precio float,
+                                    ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+
+ MySQL  localhost:3306  personal  SQL > create table productos( no_producto int auto_increment primary key, nombre varchar(50), precio float);
+Query OK, 0 rows affected (0.0461 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table facturas(
+                                    ... no_factura int auto_increment primary key,
+                                    ... fecha_compra datetime,
+                                    ... no_cliente int,
+                                    ... REFERENCES clientes(no_cliente) ON DELETE restrict ON UPDATE;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REFERENCES clientes(no_cliente) ON DELETE restrict ON UPDATE' at line 5
+
+ MySQL  localhost:3306  personal  SQL > create table facturas( no_factura int auto_increment primary key, fecha_compra datetime, no_cliente int REFERENCES clientes(no_cliente) ON DELETE restrict ON UPDATE CASCADE);
+Query OK, 0 rows affected (0.0360 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc clientes;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| no_cliente | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(50)  | YES  |     | NULL    |                |
+| apellido   | varchar(50)  | YES  |     | NULL    |                |
+| RFC        | varchar(13)  | YES  |     | NULL    |                |
+| direccion  | varchar(100) | YES  |     | NULL    |                |
+| telefono   | varchar(50)  | YES  |     | NULL    |                |
+| celular    | varchar(50)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.0042 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into cliente(nombre, apellido) values('Juan', 'Perez');
+ERROR: 1146 (42S02): Table 'personal.cliente' doesn't exist
+
+ MySQL  localhost:3306  personal  SQL > insert into clientes(nombre, apellido) values('Juan', 'Perez');
+Query OK, 1 row affected (0.0277 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc clientes;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| no_cliente | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(50)  | YES  |     | NULL    |                |
+| apellido   | varchar(50)  | YES  |     | NULL    |                |
+| RFC        | varchar(13)  | YES  |     | NULL    |                |
+| direccion  | varchar(100) | YES  |     | NULL    |                |
+| telefono   | varchar(50)  | YES  |     | NULL    |                |
+| celular    | varchar(50)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.0046 sec)
+
+ MySQL  localhost:3306  personal  SQL > slect *from clientes;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect *from clientes' at line 1
+
+ MySQL  localhost:3306  personal  SQL > select * from clientes;
++------------+--------+----------+------+-----------+----------+---------+
+| no_cliente | nombre | apellido | RFC  | direccion | telefono | celular |
++------------+--------+----------+------+-----------+----------+---------+
+|          1 | Juan   | Perez    | NULL | NULL      | NULL     | NULL    |
++------------+--------+----------+------+-----------+----------+---------+
+1 row in set (0.0296 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into facturas(fecha_compra,_no_cliente) values('2018-09-12',1);
+ERROR: 1054 (42S22): Unknown column '_no_cliente' in 'field list'
+
+ MySQL  localhost:3306  personal  SQL > insert into facturas(fecha_compra,no_cliente) values('2018-09-12',1);
+Query OK, 1 row affected (0.0163 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into facturas(fecha_compra,no_cliente) values('2018-09-12',3);
+Query OK, 1 row affected (0.0313 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from facturas;
++------------+---------------------+------------+
+| no_factura | fecha_compra        | no_cliente |
++------------+---------------------+------------+
+|          1 | 2018-09-12 00:00:00 |          1 |
+|          2 | 2018-09-12 00:00:00 |          3 |
++------------+---------------------+------------+
+2 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc clientes;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| no_cliente | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(50)  | YES  |     | NULL    |                |
+| apellido   | varchar(50)  | YES  |     | NULL    |                |
+| RFC        | varchar(13)  | YES  |     | NULL    |                |
+| direccion  | varchar(100) | YES  |     | NULL    |                |
+| telefono   | varchar(50)  | YES  |     | NULL    |                |
+| celular    | varchar(50)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.0047 sec)
+
+ MySQL  localhost:3306  personal  SQL > update clientes
+                                    ... set
+                                    ... no_cliente = 5
+                                    ... where no_cliente = 1;
+Query OK, 1 row affected (0.1116 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > select * from clientes;
++------------+--------+----------+------+-----------+----------+---------+
+| no_cliente | nombre | apellido | RFC  | direccion | telefono | celular |
++------------+--------+----------+------+-----------+----------+---------+
+|          5 | Juan   | Perez    | NULL | NULL      | NULL     | NULL    |
++------------+--------+----------+------+-----------+----------+---------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from facturas;
++------------+---------------------+------------+
+| no_factura | fecha_compra        | no_cliente |
++------------+---------------------+------------+
+|          1 | 2018-09-12 00:00:00 |          1 |
+|          2 | 2018-09-12 00:00:00 |          3 |
++------------+---------------------+------------+
+2 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > alter table facturas(
+                                    ... add constraint foreign key ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(
+add constraint foreign key' at line 1
+
+ MySQL  localhost:3306  personal  SQL > delete * from facturas;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from facturas' at line 1
+
+ MySQL  localhost:3306  personal  SQL > delete from facturas;
+Query OK, 2 rows affected (0.0585 sec)
+
+ MySQL  localhost:3306  personal  SQL > alter table facturas
+                                    ... add constraint foreign key (no_cliente)
+                                    ... references clientes(no_cliente) on delete restrict on update cascade;
+Query OK, 0 rows affected (0.3205 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > desc clientes;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| no_cliente | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(50)  | YES  |     | NULL    |                |
+| apellido   | varchar(50)  | YES  |     | NULL    |                |
+| RFC        | varchar(13)  | YES  |     | NULL    |                |
+| direccion  | varchar(100) | YES  |     | NULL    |                |
+| telefono   | varchar(50)  | YES  |     | NULL    |                |
+| celular    | varchar(50)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.0046 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from clientes;
++------------+--------+----------+------+-----------+----------+---------+
+| no_cliente | nombre | apellido | RFC  | direccion | telefono | celular |
++------------+--------+----------+------+-----------+----------+---------+
+|          5 | Juan   | Perez    | NULL | NULL      | NULL     | NULL    |
++------------+--------+----------+------+-----------+----------+---------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into facturas(fecha_compra,no_cliente) values('2018-09-12',1);
+ERROR: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`personal`.`facturas`, CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`no_cliente`) REFERENCES `clientes` (`no_cliente`) ON UPDATE CASCADE)
+
+ MySQL  localhost:3306  personal  SQL > insert into facturas(fecha_compra,no_cliente) values('2018-09-12',5);
+Query OK, 1 row affected (0.0292 sec)
+
+ MySQL  localhost:3306  personal  SQL > update clientes set
+                                    ... no_cliente = 3
+                                    ... where no_cliente = 5;
+Query OK, 1 row affected (0.0245 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > select ¨from clientesd;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?from clientesd' at line 1
+
+ MySQL  localhost:3306  personal  SQL > select * from clientes;
++------------+--------+----------+------+-----------+----------+---------+
+| no_cliente | nombre | apellido | RFC  | direccion | telefono | celular |
++------------+--------+----------+------+-----------+----------+---------+
+|          3 | Juan   | Perez    | NULL | NULL      | NULL     | NULL    |
++------------+--------+----------+------+-----------+----------+---------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > delete from clientes;
+ERROR: 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`personal`.`facturas`, CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`no_cliente`) REFERENCES `clientes` (`no_cliente`) ON UPDATE CASCADE)
+
+ MySQL  localhost:3306  personal  SQL >

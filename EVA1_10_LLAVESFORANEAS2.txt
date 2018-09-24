@@ -1,0 +1,188 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect --mysql root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 4
+Server version: 5.5.61 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  SQL > \use personal
+Default schema set to `personal`.
+Fetching table and column names from `personal` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  personal  SQL > desc facturas
+                                    ... ;
++--------------+----------+------+-----+---------+----------------+
+| Field        | Type     | Null | Key | Default | Extra          |
++--------------+----------+------+-----+---------+----------------+
+| no_factura   | int(11)  | NO   | PRI | NULL    | auto_increment |
+| fecha_compra | datetime | YES  |     | NULL    |                |
+| no_cliente   | int(11)  | YES  | MUL | NULL    |                |
++--------------+----------+------+-----+---------+----------------+
+3 rows in set (0.0041 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from facturas
+                                    ... ;
++------------+---------------------+------------+
+| no_factura | fecha_compra        | no_cliente |
++------------+---------------------+------------+
+|          4 | 2018-09-12 00:00:00 |          3 |
++------------+---------------------+------------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table factura_detalle(
+                                    ... clave int auto_increment primary key,
+                                    ... no_factura int constraint foreign key facturas(no_factura),
+                                    ... no_producto int constraint foreign key productos(no_producto),
+                                    ... cantidad int,
+                                    ... descuento float,
+                                    ... precio float);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constraint foreign key facturas(no_factura),
+no_producto int constraint foreign ' at line 3
+
+ MySQL  localhost:3306  personal  SQL > create table factura_detalle( clave int auto_increment primary key, no_factura int constraint foreign key facturas(no_factura), no_producto int, cantidad int, descuento float, precio float, foreign key )
+                                    ... create table factura_detalle( clave int auto_increment primary key, no_factura int constraint foreign key facturas(no_factura), no_producto int constraint foreign key productos(no_producto), cantidad int, descuento float, precio float);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constraint foreign key facturas(no_factura), no_producto int, cantidad int, desc' at line 1
+
+ MySQL  localhost:3306  personal  SQL > create table factura_detalle( clave int auto_increment primary key, no_factura int constraint foreign key facturas(no_factura), no_producto int, cantidad int, descuento float, precio float,
+                                    ... foreign key (no_factura) references facturas(no_factura),
+                                    ... foreign key (no_producto) references prodcutos(no_producto));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constraint foreign key facturas(no_factura), no_producto int, cantidad int, desc' at line 1
+
+ MySQL  localhost:3306  personal  SQL > create table factura_detalle( clave int auto_increment primary key, no_factura int, no_producto int, cantidad int, descuento float, precio float, foreign key (no_factura) references facturas(no_factura), foreign key (no_producto) references prodcutos(no_producto));
+ERROR: 1005 (HY000): Can't create table 'personal.factura_detalle' (errno: 150)
+
+ MySQL  localhost:3306  personal  SQL > create table factura_detalle( clave int auto_increment primary key, no_factura int, no_producto int, cantidad int, descuento float, precio float, foreign key (no_factura) references facturas(no_factura), foreign key (no_producto) references productos(no_producto));
+Query OK, 0 rows affected (0.0552 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc productos;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| no_producto | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nombre      | varchar(50) | YES  |     | NULL    |                |
+| precio      | float       | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.0044 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from productos;
+Empty set (0.0004 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into productos(nombre,precio) values ('Manzanas',15),
+                                    ... ('Peras',16)
+                                    ... ,('Chiles',17),
+                                    ... ('Aguacate',1528);
+Query OK, 4 rows affected (0.4085 sec)
+
+Records: 4  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > drop table facturas;
+ERROR: 1217 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+
+ MySQL  localhost:3306  personal  SQL > drop table factura_detalles;
+ERROR: 1051 (42S02): Unknown table 'factura_detalles'
+
+ MySQL  localhost:3306  personal  SQL > drop table factura_detalle;
+Query OK, 0 rows affected (0.0291 sec)
+
+ MySQL  localhost:3306  personal  SQL > create table factura_detalles(
+                                    ... clave int auto_increment primary key,
+                                    ... no_factura int,
+                                    ... no_producto int,
+                                    ... cantidad int,
+                                    ... descuento int,
+                                    ... precio float,
+                                    ... foreign key (no_factura) references facturas(no_factura) on update cascade on delete cascade,
+                                    ... foreign key (no_producto) references productos(no_producto) on update cascade on delete restrict);
+Query OK, 0 rows affected (0.0554 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from facturas;
++------------+---------------------+------------+
+| no_factura | fecha_compra        | no_cliente |
++------------+---------------------+------------+
+|          4 | 2018-09-12 00:00:00 |          3 |
++------------+---------------------+------------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > insert into factura_detalles(no_factura,no_producto,cantidad,precio)
+                                    ... values(3,1,100,15),(3,2,20,20), foreign key (3,3,50,50);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (3,3,50,50)' at line 2
+
+ MySQL  localhost:3306  personal  SQL > insert into factura_detalles(no_factura,no_producto,cantidad,precio) values(4,1,100,15),(4,2,20,20), foreign key (4,3,50,50);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (4,3,50,50)' at line 1
+
+ MySQL  localhost:3306  personal  SQL > insert into factura_detalles(no_factura,no_producto,cantidad,precio) values(4,1,100,15),(4,2,20,20),  (4,3,50,50);
+Query OK, 3 rows affected (0.0276 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > insert into factura_detalles(no_factura,no_producto,cantidad,precio) values(4,1,100,15),(4,2,20,20),  (4,3,20,50);
+Query OK, 3 rows affected (0.0290 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > update facturas
+                                    ... set
+                                    ... no_factura = 100
+                                    ... where no_factura = 4;
+Query OK, 1 row affected (0.0478 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:3306  personal  SQL > select * from factura_detalles;
++-------+------------+-------------+----------+-----------+--------+
+| clave | no_factura | no_producto | cantidad | descuento | precio |
++-------+------------+-------------+----------+-----------+--------+
+|     1 |        100 |           1 |      100 |      NULL |     15 |
+|     2 |        100 |           2 |       20 |      NULL |     20 |
+|     3 |        100 |           3 |       50 |      NULL |     50 |
+|     4 |        100 |           1 |      100 |      NULL |     15 |
+|     5 |        100 |           2 |       20 |      NULL |     20 |
+|     6 |        100 |           3 |       20 |      NULL |     50 |
++-------+------------+-------------+----------+-----------+--------+
+6 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > delete from productos
+                                    ... where no_producto = 1;
+ERROR: 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`personal`.`factura_detalles`, CONSTRAINT `factura_detalles_ibfk_2` FOREIGN KEY (`no_producto`) REFERENCES `productos` (`no_producto`) ON UPDATE CASCADE)
+
+ MySQL  localhost:3306  personal  SQL > delete from facturas;
+Query OK, 1 row affected (0.0291 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from facturas;
+Empty set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > select * from factura_detalles;
+Empty set (0.0003 sec)
+
+ MySQL  localhost:3306  personal  SQL > desc carrera;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| nombre   | varchar(50) | NO   | PRI |         |       |
+| creditos | int(11)     | YES  |     | NULL    |       |
+| semestre | int(11)     | YES  |     | NULL    |       |
+| area     | varchar(50) | NO   | PRI |         |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0045 sec)
+
+ MySQL  localhost:3306  personal  SQL >
+
+
+
+

@@ -1,0 +1,182 @@
+MySQL Shell 8.0.11
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect --mysql sergio@localhost
+Creating a Classic session to 'sergio@localhost'
+Enter password: ****
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 15
+Server version: 8.0.11 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > \use personal
+Default schema set to `personal`.
+Fetching table and column names from `personal` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  personal  SQL > desc estudiante;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | NO   | PRI |         |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
+| no_telefono      | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+---FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFDSFDSF;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPDADFDFDSDDSFDSFDSF' at line 8                                      FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFDSFDSF
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFDSFDS
+ MySQL  localhost:3306 ssl  personal  SQL > DFSD:GN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFDSFD
+                                        ... FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFDSF
+                                        ... FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFDS
+                                        ... FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSFD
+                                        ... FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDSF
+                                        ... FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDDS
+                                        ... FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSDD
+                                        ... ;OREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFDSD
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DFSD:' at line 1
+                                            FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDFD
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDF
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADFDr the right syntax to use near 'des materias' at line 1
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDADF
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDAD
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDA
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDAT
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE C
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE CA
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE CAS
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE CASA
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE CAS
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE CA
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE C
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATEC
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDAT
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDA
+ MySQL  localhost:3306 ssl  personal  SQL > FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPD
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL > create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int NOT NULL, nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade,
+                                        ... FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict,
+                                        ... FOREIGN KEY (nombre_materia) REFERENCES materia(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key constraint
+
+ MySQL  localhost:3306 ssl  personal  SQL > create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int NOT NULL, nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materia(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key constraint
+
+ MySQL  localhost:3306 ssl  personal  SQL > desc carrera;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| nombre   | varchar(50) | NO   | PRI |         |       |
+| creditos | int(11)     | YES  |     | NULL    |       |
+| semestre | int(11)     | YES  |     | NULL    |       |
+| area     | varchar(50) | NO   | PRI |         |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  personal  SQL > desc materia;
+ERROR: 1146 (42S02): Table 'personal.materia' doesn't exist
+
+ MySQL  localhost:3306 ssl  personal  SQL > desc materias;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| nombre          | varchar(100) | NO   | PRI |         |       |
+| creditos        | int(11)      | YES  |     | NULL    |       |
+| horas_teoricas  | int(11)      | YES  |     | NULL    |       |
+| horas_practicas | int(11)      | YES  |     | NULL    |       |
+| carrera         | varchar(3)   | YES  |     | NULL    |       |
+| semestre        | int(11)      | NO   | PRI | 0       |       |
++-----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  personal  SQL > create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int NOT NULL, nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key constraint
+
+ MySQL  localhost:3306 ssl  personal  SQL > create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int, nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key constraint
+                                            create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int NOT NULL, nombre_carrera varchar(50), nombre_materia varchar(100), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int, nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key constraintE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+Y (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ MySQL  localhost:3306 ssl  personal  SQL > ) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ MySQL  localhost:3306 ssl  personal  SQL > ) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ MySQL  localhost:3306 ssl  personal  SQL > ) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ MySQL  localhost:3306 ssl  personal  SQL > ) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL > create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control int, nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+ERROR: 1215 (HY000): Cannot add foreign key constraint
+
+ MySQL  localhost:3306 ssl  personal  SQL > create table horario_estudiante( clave int PRIMARY KEY AUTO_INCREMENT, estudiante_no_control VARCHAR(10), nombre_carrera varchar(50), nombre_materia varchar(50), hora_entrada TIME, hora_salida TIME, FOREIGN KEY (estudiante_no_control) REFERENCES estudiante(no_control) ON UPDATE cascade ON DELETE cascade, FOREIGN KEY (nombre_carrera) REFERENCES carrera(nombre) ON DELETE restrict ON UPDATE restrict, FOREIGN KEY (nombre_materia) REFERENCES materias(nombre) ON DELETE restrict ON UPDATE restrict);
+Query OK, 0 rows affected (1.3027 sec)
+
+ MySQL  localhost:3306 ssl  personal  SQL > DESC horario_estudiante;
++-----------------------+-------------+------+-----+---------+----------------+
+| Field                 | Type        | Null | Key | Default | Extra          |
++-----------------------+-------------+------+-----+---------+----------------+
+| clave                 | int(11)     | NO   | PRI | NULL    | auto_increment |
+| estudiante_no_control | varchar(10) | YES  | MUL | NULL    |                |
+| nombre_carrera        | varchar(50) | YES  | MUL | NULL    |                |
+| nombre_materia        | varchar(50) | YES  | MUL | NULL    |                |
+| hora_entrada          | time        | YES  |     | NULL    |                |
+| hora_salida           | time        | YES  |     | NULL    |                |
++-----------------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.0341 sec)
+
+ MySQL  localhost:3306 ssl  personal  SQL > insert into estudiante() values('16550500', 'Castillo','Muñoz','1998-04-02','Chihuahua','Mexico','Prefiere_no_decirlo','6143582960');
+Query OK, 1 row affected (0.1938 sec)
+
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
++------------+------------------+------------------+-----------------+------------------+-----------------+---------------------+-------------+
+| no_control | apellido_materno | apellido_paterno | fecha_nacmiento | lugar_nacimiento | pais_nacimiento | genero              | no_telefono |
++------------+------------------+------------------+-----------------+------------------+-----------------+---------------------+-------------+
+| 16550500   | Castillo         | Mu MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > insert into estudiante() values('16550500', 'Castillo','Muñoz','1998-04-02','Chihuahua','Mexico','Prefiere_no_decirlo','6143582960');
+ERROR: 1062 (23000): Duplicate entry '16550500' for key 'PRIMARY'
+ MySQL  localhost:3306 ssl  personal  SQL >
+ MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL > desc estudiante;
+ MySQL  localhost:3306 ssl  personal  SQL >

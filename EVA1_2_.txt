@@ -1,0 +1,280 @@
+﻿MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > connect -c root@localhost;
+SyntaxError: Unexpected identifier
+
+ MySQL  JS > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 1
+Server version: 5.5.61 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  localhost:3306  SQL > \use evaluacion_1
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'evaluacion_1'
+
+ MySQL  localhost:3306  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+4 rows in set (0.0008 sec)
+
+ MySQL  localhost:3306  SQL > \use test
+Default schema set to `test`.
+Fetching table and column names from `test` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  test  SQL > create table materias(
+                                ... nombre varchar(100),
+                                ... creditos int,
+                                ... horas_teoricas int,
+                                ... horas_practicas int,
+                                ... carrera varchar(3),
+                                ... semestre int);
+Query OK, 0 rows affected (0.0921 sec)
+
+ MySQL  localhost:3306  test  SQL > select * from materias
+                                ... ;
+Empty set (0.0017 sec)
+
+ MySQL  localhost:3306  test  SQL > show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| materias       |
++----------------+
+1 row in set (0.0006 sec)
+
+ MySQL  localhost:3306  test  SQL > desc table;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table' at line 1
+
+ MySQL  localhost:3306  test  SQL > desc materias;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| nombre          | varchar(100) | YES  |     | NULL    |       |
+| creditos        | int(11)      | YES  |     | NULL    |       |
+| horas_teoricas  | int(11)      | YES  |     | NULL    |       |
+| horas_practicas | int(11)      | YES  |     | NULL    |       |
+| carrera         | varchar(3)   | YES  |     | NULL    |       |
+| semestre        | int(11)      | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.0306 sec)
+
+ MySQL  localhost:3306  test  SQL > create tabñe estudiante(
+                                ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tab��e estudiante(' at line 1
+
+ MySQL  localhost:3306  test  SQL > create table estudiante(
+                                ... no_control varchar(10),
+                                ... apellido_materno varchar(50),
+                                ... apellido_paterno varchar(50)
+                                ... ,
+                                ... fecha_nacmiento date,
+                                ... lugar_nacimiento varchar(50),
+                                ... pais_nacimiento varchar(50),
+                                ... genero varchar(50));
+Query OK, 0 rows affected (0.0352 sec)
+
+ MySQL  localhost:3306  test  SQL > desc materia;
+ERROR: 1146 (42S02): Table 'test.materia' doesn't exist
+
+ MySQL  localhost:3306  test  SQL > desc materias;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| nombre          | varchar(100) | YES  |     | NULL    |       |
+| creditos        | int(11)      | YES  |     | NULL    |       |
+| horas_teoricas  | int(11)      | YES  |     | NULL    |       |
+| horas_practicas | int(11)      | YES  |     | NULL    |       |
+| carrera         | varchar(3)   | YES  |     | NULL    |       |
+| semestre        | int(11)      | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.0045 sec)
+
+ MySQL  localhost:3306  test  SQL > desc estudiante;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | YES  |     | NULL    |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.0051 sec)
+
+ MySQL  localhost:3306  test  SQL > create temporary table Temporal(
+                                ... nombre varchar(60));
+Query OK, 0 rows affected (0.0241 sec)
+
+ MySQL  localhost:3306  test  SQL > show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| estudiante     |
+| materias       |
++----------------+
+2 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  test  SQL > mysqlsh
+                                ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysqlsh' at line 1
+
+ MySQL  localhost:3306  test  SQL > \myswlsh
+                                ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\myswlsh' at line 1
+
+ MySQL  localhost:3306  test  SQL > \mysqlsh;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\mysqlsh' at line 1
+
+ MySQL  localhost:3306  test  SQL > create table felicidad(
+                                ... no_existo int);
+Query OK, 0 rows affected (0.0754 sec)
+
+ MySQL  localhost:3306  test  SQL > show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| estudiante     |
+| felicidad      |
+| materias       |
++----------------+
+3 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  test  SQL > drop felicidad
+                                ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'felicidad' at line 1
+
+ MySQL  localhost:3306  test  SQL > drop table condenada;
+ERROR: 1051 (42S02): Unknown table 'condenada'
+
+ MySQL  localhost:3306  test  SQL > show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| estudiante     |
+| felicidad      |
+| materias       |
++----------------+
+3 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306  test  SQL > drop table felicidad;
+Query OK, 0 rows affected (0.0285 sec)
+
+ MySQL  localhost:3306  test  SQL > show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| estudiante     |
+| materias       |
++----------------+
+2 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306  test  SQL > desc estudiante;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | YES  |     | NULL    |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.0048 sec)
+
+ MySQL  localhost:3306  test  SQL > alter tabe estudiante add column no_telefono varchar(20);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabe estudiante add column no_telefono varchar(20)' at line 1
+
+ MySQL  localhost:3306  test  SQL > alter table estudiante add column no_telefono varchar(20);
+Query OK, 0 rows affected (0.0890 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  test  SQL > desc estudiante;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | YES  |     | NULL    |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
+| no_telefono      | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.0057 sec)
+
+ MySQL  localhost:3306  test  SQL > alter rable estudiante add column correo after genero;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rable estudiante add column correo after genero' at line 1
+
+ MySQL  localhost:3306  test  SQL > alter table estudiante add column correo after genero;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'after genero' at line 1
+
+ MySQL  localhost:3306  test  SQL > alter table estudiante add column correo varchar(12) after genero;
+Query OK, 0 rows affected (0.1440 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  test  SQL > desc estudiante
+                                ... ;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | YES  |     | NULL    |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
+| correo           | varchar(12) | YES  |     | NULL    |       |
+| no_telefono      | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+9 rows in set (0.0053 sec)
+
+ MySQL  localhost:3306  test  SQL > alter table estudiante drop correo;
+Query OK, 0 rows affected (0.0800 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306  test  SQL > desc estudiante;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| no_control       | varchar(10) | YES  |     | NULL    |       |
+| apellido_materno | varchar(50) | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50) | YES  |     | NULL    |       |
+| fecha_nacmiento  | date        | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50) | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50) | YES  |     | NULL    |       |
+| genero           | varchar(50) | YES  |     | NULL    |       |
+| no_telefono      | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.0062 sec)
+
+ MySQL  localhost:3306  test  SQL >

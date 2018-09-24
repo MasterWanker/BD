@@ -1,0 +1,173 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > connect -c root@localhost
+SyntaxError: Unexpected identifier
+
+ MySQL  JS > connect -c root@localhost
+SyntaxError: Unexpected identifier
+
+ MySQL  JS > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 5.5.20 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  localhost:3306  SQL > select version()
+                          ... ;
++-----------+
+| version() |
++-----------+
+| 5.5.20    |
++-----------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > select dayname()
+                          ... ;
+ERROR: 1582 (42000): Incorrect parameter count in the call to native function 'dayname'
+
+ MySQL  localhost:3306  SQL > select dayname('2018-08-27');
++-----------------------+
+| dayname('2018-08-27') |
++-----------------------+
+| Monday                |
++-----------------------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > select now();
++---------------------+
+| now()               |
++---------------------+
+| 2018-08-27 12:28:58 |
++---------------------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > select time_to_sec('24:00:00') as Seg_en_un_dia ;
++---------------+
+| Seg_en_un_dia |
++---------------+
+|         86400 |
++---------------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > select time_to_sec('23:59:59') as Seg_en_un_dia ;
++---------------+
+| Seg_en_un_dia |
++---------------+
+|         86399 |
++---------------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > select sqrt(12);
++--------------------+
+| sqrt(12)           |
++--------------------+
+| 3.4641016151377544 |
++--------------------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > select (86400*365*70) as tiempo_en_mi_vida;
++-------------------+
+| tiempo_en_mi_vida |
++-------------------+
+|        2207520000 |
++-------------------+
+1 row in set (0.0002 sec)
+
+ MySQL  localhost:3306  SQL > \use test
+Default schema set to `test`.
+Fetching table and column names from `test` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  test  SQL > shoq tables;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'shoq tables' at line 1
+
+ MySQL  localhost:3306  test  SQL > show tables;
+Empty set (0.0005 sec)
+
+ MySQL  localhost:3306  test  SQL > select * from mysql.user;
++-----------+------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+--------+-----------------------+
+| Host      | User | Password                                  | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv | Drop_priv | Reload_priv | Shutdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_table_priv | Lock_tables_priv | Execute_priv | Repl_slave_priv | Repl_client_priv | Create_view_priv | Show_view_priv | Create_routine_priv | Alter_routine_priv | Create_user_priv | Event_priv | Trigger_priv | Create_tablespace_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_connections | max_user_connections | plugin | authentication_string |
++-----------+------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+--------+-----------------------+
+| localhost | root | *81F5E21E35407D884A6CD4A731AEBFB6AF209E1B | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          |            |             |              |             0 |           0 |               0 |                    0 |        |                       |
++-----------+------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+--------+-----------------------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  test  SQL > select user from mysql.user;
++------+
+| user |
++------+
+| root |
++------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  test  SQL > create database hitler_was_right;
+Query OK, 1 row affected (0.0018 sec)
+
+ MySQL  localhost:3306  test  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| hitler_was_right   |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.0009 sec)
+
+ MySQL  localhost:3306  test  SQL > drop database hitler_was_right;
+Query OK, 0 rows affected (0.0015 sec)
+
+ MySQL  localhost:3306  test  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+4 rows in set (0.0007 sec)
+
+ MySQL  localhost:3306  test  SQL > create database evaluacion_1;
+Query OK, 1 row affected (0.0019 sec)
+
+ MySQL  localhost:3306  test  SQL > show databses,
+                                ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses,' at line 1
+
+ MySQL  localhost:3306  test  SQL > show databses;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+
+ MySQL  localhost:3306  test  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| evaluacion_1       |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.0008 sec)
+
+ MySQL  localhost:3306  test  SQL > FIN;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FIN' at line 1
+
+ MySQL  localhost:3306  test  SQL >
+ MySQL  localhost:3306  test  SQL >
