@@ -140,7 +140,7 @@ Query OK, 1 row affected (0.0251 sec)
 +-----------------+--------------+------+-----+---------+-------+
 6 rows in set (0.0049 sec)
 
- MySQL  localhost:3306  personal  SQL > select ¨from materias;
+ MySQL  localhost:3306  personal  SQL > select Â¨from materias;
 ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?from materias' at line 1
 
  MySQL  localhost:3306  personal  SQL > select * from materias;
