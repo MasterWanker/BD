@@ -154,7 +154,7 @@ Query OK, 0 rows affected (1.3027 sec)
 +-----------------------+-------------+------+-----+---------+----------------+
 6 rows in set (0.0341 sec)
 
- MySQL  localhost:3306 ssl  personal  SQL > insert into estudiante() values('16550500', 'Castillo','Muñoz','1998-04-02','Chihuahua','Mexico','Prefiere_no_decirlo','6143582960');
+ MySQL  localhost:3306 ssl  personal  SQL > insert into estudiante() values('16550500', 'Castillo','MuÃ±oz','1998-04-02','Chihuahua','Mexico','Prefiere_no_decirlo','6143582960');
 Query OK, 1 row affected (0.1938 sec)
 
  MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
@@ -174,7 +174,7 @@ Query OK, 1 row affected (0.1938 sec)
  MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
  MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
  MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
- MySQL  localhost:3306 ssl  personal  SQL > insert into estudiante() values('16550500', 'Castillo','Muñoz','1998-04-02','Chihuahua','Mexico','Prefiere_no_decirlo','6143582960');
+ MySQL  localhost:3306 ssl  personal  SQL > insert into estudiante() values('16550500', 'Castillo','MuÃ±oz','1998-04-02','Chihuahua','Mexico','Prefiere_no_decirlo','6143582960');
 ERROR: 1062 (23000): Duplicate entry '16550500' for key 'PRIMARY'
  MySQL  localhost:3306 ssl  personal  SQL >
  MySQL  localhost:3306 ssl  personal  SQL > select * from estudiante;
