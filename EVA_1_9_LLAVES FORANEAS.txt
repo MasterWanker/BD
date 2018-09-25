@@ -257,7 +257,7 @@ Query OK, 1 row affected (0.0245 sec)
 
 Rows matched: 1  Changed: 1  Warnings: 0
 
- MySQL  localhost:3306  personal  SQL > select ¨from clientesd;
+ MySQL  localhost:3306  personal  SQL > select Â¨from clientesd;
 ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?from clientesd' at line 1
 
  MySQL  localhost:3306  personal  SQL > select * from clientes;
